@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roblox Bypass Chat 2025</title>
+  <!-- Fuente estilo gamer -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <!-- Iconos (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Hoja de estilo principal -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body id="indexPage">
+  <header class="site-header">
+    <h1 class="site-title">🎮 Roblox Bypass Chat 2025</h1>
+    <p class="site-subtitle" id="siteSubtitle">Traduce y transforma texto con caracteres especiales (versión Anime incluida)</p>
+    <button id="btn-config" class="btn-config" title="Abrir Configuración">
+      <i class="fa fa-gear"></i>
+    </button>
+  </header>
+
+  <!-- Panel de Configuración (Modal) -->
+  <div id="config-panel" class="modal-config hidden">
+    <div class="config-content">
+      <h2>Configuración <i class="fa fa-gear"></i></h2>
+      <div class="config-option">
+        <label for="select-tema">Tema:</label>
+        <select id="select-tema">
+          <option value="auto">Automático (SO)</option>
+          <option value="claro">Claro</option>
+          <option value="oscuro">Oscuro</option>
+        </select>
+      </div>
+      <div class="config-option">
+        <label for="select-language">Idioma:</label>
+        <select id="select-language">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="config-option">
+        <label>
+          <input type="checkbox" id="chk-historial" checked>
+          Guardar historial de traducciones
+        </label>
+      </div>
+      <div class="config-option">
+        <button id="btn-borrar-hist">Borrar historial (y cookies)</button>
+      </div>
+      <!-- Link al panel admin -->
+      <div class="config-option">
+        <a href="admin.html" class="btn-login-admin">Panel de Administración</a>
+      </div>
+      <button id="btn-cerrar-config" class="btn-cerrar-config">Cerrar</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Sección principal de traducción -->
+    <section class="card translator-card" id="mainTranslatorSection">
+      <label for="inputText" id="inputLabel">Texto a traducir:</label>
+      <textarea id="inputText" placeholder="Ingresa texto..." rows="2"></textarea>
+      <div class="buttons">
+        <button id="translateBtn">Traducir</button>
+        <select id="modeSelect">
+          <!-- Se llenará con JS según los modos activos -->
+        </select>
+      </div>
+      <div class="output-container">
+        <label for="outputText">Resultado:</label>
+        <textarea id="outputText" rows="2" readonly placeholder="Resultado"></textarea>
+        <button id="copyResultBtn" class="copy-btn">📋 Copiar</button>
+      </div>
+    </section>
+
+    <!-- Sección historial -->
+    <section class="card history-card" id="history-section">
+      <div class="history-header">
+        <h2>Historial</h2>
+        <button id="clearHistoryBtn" class="btn">🗑 Borrar historial</button>
+      </div>
+      <div id="history-list">
+        <p id="history-empty">No hay traducciones en el historial.</p>
+      </div>
+    </section>
+
+    <!-- Sección de Feedback (NUEVA) -->
+    <section class="card about-card" id="feedback-section">
+      <h2>¡Envíanos tu Feedback!</h2>
+      <p>¿Qué opinas de nuestro traductor? ¿Sugerencias, ideas o bugs? Envíanos un comentario.</p>
+      <form id="feedbackForm" class="feedback-form">
+        <label for="feedbackName">Tu nombre (opcional):</label>
+        <input type="text" id="feedbackName" placeholder="Ej. Juan Gamer" />
+
+        <label for="feedbackMsg">Mensaje/Feedback:</label>
+        <textarea id="feedbackMsg" rows="3" placeholder="Escribe tu comentario..."></textarea>
+
+        <button type="submit" class="btn">Enviar Feedback</button>
+      </form>
+    </section>
+
+    <!-- Sección “Acerca de” -->
+    <section class="card about-card">
+      <h2>Acerca de</h2>
+      <p id="about-text">
+        Este sitio te permite convertir texto con caracteres especiales en letras normales o estilos divertidos (incluido <em>Modo Anime</em>), ideal para sortear filtros de moderación en Roblox. Versión actualizada de 2025. 
+      </p>
+      <p id="about-discord">
+        Únete a nuestro servidor de Discord para más ayuda, novedades y charlas de la comunidad.
+      </p>
+      <div class="discord-btn-container">
+        <button class="btn-discord" onclick="openDiscord()">
+          <i class="fab fa-discord"></i> <span>Unirme al Discord</span>
+        </button>
+      </div>
+      <!-- Mensaje global (fijado desde admin) -->
+      <div id="universal-messages"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
