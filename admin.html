@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Roblox Bypass Chat 2025</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- CSS personal -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="adminPage" class="bg-dark text-light">
+  <header class="text-center p-3">
+    <h1 class="mb-0">Panel de Administración 2025</h1>
+    <p class="lead">Roblox Bypass Chat</p>
+  </header>
+
+  <main class="container my-3">
+    <!-- LOGIN -->
+    <section id="loginSection" class="card bg-secondary p-3 mb-4">
+      <h2 class="mb-3">Ingreso Privado</h2>
+      <p>Solo personal autorizado.</p>
+      <form>
+        <div class="mb-3">
+          <label for="adminUser" class="form-label">Usuario:</label>
+          <input type="text" id="adminUser" class="form-control" placeholder="admin">
+        </div>
+        <div class="mb-3">
+          <label for="adminPass" class="form-label">Contraseña:</label>
+          <input type="password" id="adminPass" class="form-control" placeholder="********">
+        </div>
+        <button 
+          id="adminLoginBtn"
+          class="btn btn-primary w-100"
+          type="submit"
+        >
+          <i class="fa fa-sign-in-alt"></i> Ingresar
+        </button>
+      </form>
+      <div
+        id="adminLoginError"
+        class="text-danger mt-2"
+        style="display:none;"
+      >
+        Credenciales incorrectas. Intenta de nuevo.
+      </div>
+    </section>
+
+    <!-- PANEL ADMIN (oculto hasta login) -->
+    <section 
+      id="adminPanel"
+      class="card bg-secondary p-3 mb-3 d-none"
+    >
+      <h2 class="mb-3">Panel de Administración</h2>
+
+      <!-- Estadísticas y Logs -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="card bg-dark text-light p-3">
+            <h5>Estadísticas de Uso</h5>
+            <p><strong>Tu IP:</strong> <span id="adminIP">--</span></p>
+            <p><strong>País:</strong> <span id="adminCountry">--</span></p>
+            <p><strong>Visitas totales:</strong> <span id="adminVisits">--</span></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-dark text-light p-3 h-100">
+            <h5>Registro de IPs (últimas 30)</h5>
+            <ul 
+              id="adminLogs"
+              class="list-group list-group-flush bg-transparent"
+              style="max-height: 160px; overflow-y:auto;"
+            ></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfica de visitas -->
+      <div class="card bg-dark text-light p-3 mb-4">
+        <h5>Gráfica de Visitas por Día</h5>
+        <div class="text-center">
+          <canvas 
+            id="usageChart"
+            width="400"
+            height="200"
+            role="img"
+            aria-label="Gráfica de Visitas por Día"
+          ></canvas>
+        </div>
+      </div>
+
+      <!-- Mensaje Global -->
+      <div class="card bg-dark p-3 text-light mb-4">
+        <h5>Mensaje Global</h5>
+        <div class="input-group mb-3">
+          <input 
+            type="text"
+            id="adminMsgInput"
+            class="form-control"
+            placeholder="Escribe un mensaje global..."
+          >
+          <button
+            id="adminUpdateMsgBtn"
+            class="btn btn-info"
+            type="button"
+          >
+            <i class="fa fa-bullhorn"></i> Publicar
+          </button>
+        </div>
+      </div>
+
+      <!-- Bloqueo IP / Palabras -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="card bg-dark p-3 text-light h-100">
+            <h5>Bloqueo de IP</h5>
+            <div class="input-group mb-2">
+              <input 
+                type="text"
+                id="ipInput"
+                class="form-control"
+                placeholder="IP a bloquear/desbloquear"
+              >
+              <button
+                id="banIpBtn"
+                class="btn btn-danger"
+                type="button"
+              >
+                <i class="fa fa-ban"></i> Banear
+              </button>
+              <button
+                id="unbanIpBtn"
+                class="btn btn-success"
+                type="button"
+              >
+                <i class="fa fa-undo"></i> Desbanear
+              </button>
+            </div>
+            <ul 
+              id="bannedIpList"
+              class="list-group list-group-flush bg-transparent"
+              style="max-height: 130px; overflow-y:auto;"
+            ></ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-dark p-3 text-light h-100">
+            <h5>Palabras/Frases Bloqueadas</h5>
+            <div class="input-group mb-2">
+              <input 
+                type="text"
+                id="wordInput"
+                class="form-control"
+                placeholder="Palabra a bloquear"
+              >
+              <button 
+                id="blockWordBtn"
+                class="btn btn-warning"
+                type="button"
+              >
+                <i class="fa fa-times-circle"></i> Bloquear
+              </button>
+              <button
+                id="unblockWordBtn"
+                class="btn btn-secondary"
+                type="button"
+              >
+                <i class="fa fa-check-circle"></i> Desbloquear
+              </button>
+            </div>
+            <ul
+              id="blockedWordsList"
+              class="list-group list-group-flush bg-transparent"
+              style="max-height: 130px; overflow-y:auto;"
+            ></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modos de Traducción -->
+      <div class="card bg-dark p-3 text-light mb-4">
+        <h5>Modos de Traducción Activos</h5>
+        <ul
+          id="variantList"
+          class="list-group list-group-flush bg-transparent mb-3"
+          style="max-height: 130px; overflow-y:auto;"
+        ></ul>
+        <div class="input-group">
+          <span class="input-group-text">Nuevo modo:</span>
+          <input 
+            type="text"
+            id="variantName"
+            class="form-control"
+            placeholder="Ej: Modo Raro"
+          >
+          <span class="input-group-text">Separador:</span>
+          <input 
+            type="text"
+            id="variantSep"
+            class="form-control"
+            placeholder="Ej: ~"
+            maxlength="3"
+          >
+          <button
+            id="adminAddVariantBtn"
+            class="btn btn-outline-info"
+            type="button"
+          >
+            <i class="fa fa-plus"></i> Añadir
+          </button>
+        </div>
+      </div>
+
+      <!-- Historial + Feedback -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="card bg-dark p-3 text-light h-100">
+            <h5>Traducciones Recientes</h5>
+            <ul
+              id="adminTranslations"
+              class="list-group list-group-flush bg-transparent"
+              style="max-height:150px; overflow-y:auto;"
+            ></ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-dark p-3 text-light h-100">
+            <h5>Feedback de Usuarios</h5>
+            <ul
+              id="adminFeedbackList"
+              class="list-group list-group-flush bg-transparent"
+              style="max-height:150px; overflow-y:auto;"
+            ></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones Admin -->
+      <div class="card bg-dark p-3 text-light">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <button 
+            id="clearAllHistoryBtn"
+            class="btn btn-outline-danger"
+            type="button"
+          >
+            <i class="fa fa-trash-alt"></i> Borrar Todo el Historial
+          </button>
+          <a
+            href="index.html"
+            class="btn btn-secondary"
+          >
+            <i class="fa fa-arrow-left"></i> Volver al Chat
+          </a>
+          <button
+            id="logoutBtn"
+            class="btn btn-danger"
+            type="button"
+          >
+            <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- script.js -->
+  <script src="script.js"></script>
+</body>
+</html>
